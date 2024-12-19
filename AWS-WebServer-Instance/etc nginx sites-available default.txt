@@ -1,0 +1,20 @@
+server {
+    listen 80;
+    server_name _;
+
+    # Serve static files (HTML)
+    location / {
+        root /var/www/html;
+        index index.html;
+    }
+
+    # Proxy requests to PocketBase backend
+    location /pb/ {
+        proxy_pass http://98.85.141.40:8090/; # Port PocketBase
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}

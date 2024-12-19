@@ -1,0 +1,13 @@
+[Unit]
+Description=PocketBase Service
+After=network.target
+
+[Service]
+ExecStart=/home/ubuntu/pb/pocketbase serve --http=0.0.0.0:8090
+Restart=always
+RestartSec=5
+User=ubuntu
+WorkingDirectory=/home/ubuntu/pb
+
+[Install]
+WantedBy=multi-user.target
